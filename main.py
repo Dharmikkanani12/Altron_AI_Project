@@ -39,9 +39,20 @@ def run_cli():
 
 def run_gui():
     """Launch the graphical chatbot window."""
-    import tkinter as tk
+    try:
+        import tkinter as tk
+    except ImportError:
+        print("GUI unavailable: tkinter is not installed. Falling back to CLI.")
+        run_cli()
+        return
 
-    root = tk.Tk()
+    try:
+        root = tk.Tk()
+    except Exception as exc:
+        print(f"GUI unavailable: {exc}. Falling back to CLI.")
+        run_cli()
+        return
+
     AltronGUI(root)
     root.mainloop()
 

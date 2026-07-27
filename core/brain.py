@@ -5,8 +5,6 @@ Flow:
     User Question -> understand request -> plan steps -> give solution
 """
 
-import os
-
 from core import config
 from core.planner import plan_steps
 
@@ -18,7 +16,7 @@ except ImportError:  # pragma: no cover
 
 class Brain:
     def __init__(self):
-        self.provider = config.MODEL_PROVIDER
+        self.provider = config.MODEL_PROVIDER.strip().lower()
         self.model_name = config.MODEL_NAME
         self.api_key = config.API_KEY
 
