@@ -8,12 +8,15 @@ Run:
     python main.py
 """
 
+import argparse
+
 from core.brain import Brain
 from memory.memory import ShortTermMemory
+from gui.app import AltronGUI
 
 
 def run_cli():
-    """Simple command-line chat loop (swap for gui/app.py when ready)."""
+    """Simple command-line chat loop for quick chatbot use."""
     print("ALTRON AI — type 'exit' to quit.\n")
 
     brain = Brain()
@@ -34,5 +37,29 @@ def run_cli():
         print(f"ALTRON: {response}\n")
 
 
+def run_gui():
+    """Launch the graphical chatbot window."""
+    import tkinter as tk
+
+    root = tk.Tk()
+    AltronGUI(root)
+    root.mainloop()
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Run ALTRON chatbot.")
+    parser.add_argument(
+        "--gui",
+        action="store_true",
+        help="Start the graphical chat bot interface",
+    )
+    args = parser.parse_args()
+
+    if args.gui:
+        run_gui()
+    else:
+        run_cli()
+
+
 if __name__ == "__main__":
-    run_cli()
+    main()
